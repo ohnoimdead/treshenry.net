@@ -1,0 +1,17 @@
+{
+  "name": "treshenry.net",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/supervisor/lib/cli-wrapper.js app.js",
+    "debug": "node --debug-brk app.js & node-inspector"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "less-middleware": "0.1.15",
+    "mongoose": "~3.8.8",
+    "supervisor": "~0.5.7",
+    "underscore": "~1.6.0",
+    "express-hbs": "~0.7.9"
+  }
+}
