@@ -7,8 +7,9 @@ var express = require('express'),
 
 var config = require('./config'),
     User = require('./models/user'),
-    RegisterUserRoutes = require('./routes/user'),
-    RegisterAuthRoutes = require('./routes/auth');
+    RegisterAuthRoutes = require('./routes/auth'),
+    RegisterUserRoutes = require('./routes/users'),
+    RegisterPostRoutes = require('./routes/posts');
 
 var app = express();
 
@@ -51,8 +52,9 @@ User.findOne({username: config.defaultUsername}, function(err, defaultUser) {
 });
 
 app.get('/', routes.index);
-RegisterUserRoutes(app);
 RegisterAuthRoutes(app);
+RegisterUserRoutes(app);
+RegisterPostRoutes(app);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

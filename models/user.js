@@ -6,7 +6,7 @@ var Schema = Mongoose.Schema;
 
 var userSchema = new Schema({
   username: String,
-  password: String, // TODO: salt and hash
+  password: String,
   created: { type: Date, default: Date.now }
 });
 
@@ -18,7 +18,7 @@ function hashPassword(password, salt) {
 
 userSchema.statics.login = function(username, password, callback) {
   password = hashPassword(password, Config.salt);
-  this.findOne({username: username, password: password}, callback);
+  this.findOne({ username: username, password: password }, callback);
 };
 
 // Hash the password yo - we don't store clear text passwords do we? No. We don't.
