@@ -1,61 +1,63 @@
-var express = require('express'),
-    routes = require('./routes'),
-    http = require('http'),
-    path = require('path'),
-    mongoose = require('mongoose'),
-    hbs = require('express-hbs');
+var Express = require('express'),
+    Http = require('http'),
+    Path = require('path'),
+    Mongoose = require('mongoose'),
+    Hbs = require('express-hbs');
 
-var config = require('./config'),
+var Config = require('./config'),
     User = require('./models/user'),
     RegisterAuthRoutes = require('./routes/auth'),
     RegisterUserRoutes = require('./routes/users'),
     RegisterPostRoutes = require('./routes/posts');
 
-var app = express();
+var app = Express();
 
 // all environments
 // Use `.hbs` for extensions and find partials in `views/partials`.
-app.engine('html', hbs.express3({
+app.engine('html', Hbs.express3({
   partialsDir:   __dirname + '/views/partials',
   layoutsDir:    __dirname + '/views/layouts',
   defaultLayout: __dirname + '/views/layouts/default.html',
   extname:       '.html'
 }));
+
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.set('port', process.env.PORT || 3000);
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.cookieParser('shouldgetsomesharedsecretfromconfig'));
-app.use(express.session());
+app.use(Express.logger('dev'));
+app.use(Express.json());
+app.use(Express.urlencoded());
+app.use(Express.methodOverride());
+app.use(Express.cookieParser(Config.secret));
+app.use(Express.session());
 app.use(app.router);
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('less-middleware')({ src: Path.join(__dirname, 'public') }));
+app.use(Express.static(Path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+if('development' == app.get('env')) {
+  app.use(Express.errorHandler());
 }
 
-mongoose.connect(config.mongoUri);
+Mongoose.connect(Config.mongoUri);
 
 // On startup create the default user if it doesn't exist
-User.findOne({username: config.defaultUsername}, function(err, defaultUser) {
+User.findOne({username: Config.defaultUsername}, function(err, defaultUser) {
   if(err) return console.error(err);
 
   if(!defaultUser) {
-    var newDefaultUser = new User({username: config.defaultUsername, password: config.defaultPassword});
+    var newDefaultUser = new User({
+      username: Config.defaultUsername,
+      password: Config.defaultPassword
+    });
     newDefaultUser.save();
   }
 });
 
-app.get('/', routes.index);
 RegisterAuthRoutes(app);
 RegisterUserRoutes(app);
 RegisterPostRoutes(app);
 
-http.createServer(app).listen(app.get('port'), function() {
+Http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
