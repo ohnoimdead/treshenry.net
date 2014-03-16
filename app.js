@@ -4,11 +4,12 @@ var Express = require('express'),
     Mongoose = require('mongoose'),
     Hbs = require('express-hbs');
 
-var Config = require('./config'),
-    User = require('./models/user'),
-    RegisterAuthRoutes = require('./routes/auth'),
-    RegisterUserRoutes = require('./routes/users'),
-    RegisterPostRoutes = require('./routes/posts');
+var Config              = require('./config'),
+    User                = require('./models/user'),
+    RegisterIndexRoutes = require('./routes/index'),
+    RegisterAuthRoutes  = require('./routes/auth'),
+    RegisterUserRoutes  = require('./routes/users'),
+    RegisterPostRoutes  = require('./routes/posts');
 
 var app = Express();
 
@@ -54,6 +55,7 @@ User.findOne({username: Config.defaultUsername}, function(err, defaultUser) {
   }
 });
 
+RegisterIndexRoutes(app);
 RegisterAuthRoutes(app);
 RegisterUserRoutes(app);
 RegisterPostRoutes(app);

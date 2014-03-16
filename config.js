@@ -3,5 +3,6 @@ module.exports = {
   defaultUsername: 'tres',
   defaultPassword: 'tres',
   salt: 'somesecret',
-  secret: 'changemetosomethingsecure'
+  secret: 'changemetosomethingsecure',
+  siteTitle: 'treshenry.net'
 };
