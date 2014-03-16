@@ -1,4 +1,13 @@
+{{#if logged_in}}
+  <a href="/post">New</a>
+  <a href="/logout">Logout</a>
+{{/if}}
 {{#posts}}
   <h1>{{ title }}</h1>
   <div class="post-body">{{ body }}</div>
+  {{#if ../logged_in}}
+  <div class="post-controls">
+    <a href="/post/edit/{{ _id }}">Edit</a>
+  </div>
+  {{/if}}
 {{/posts}}
