@@ -7,7 +7,7 @@ var routes = [
     method: 'get',
     path: '/',
     callback: function(req, res) {
-      Post.pagedPosts(1, 100, function(err, posts) {
+      Post.pagedPosts(req.session.user != null, 1, 100, function(err, posts) {
         if(err) {
           console.log("Error getting posts: ", err);
           res.render('index', { title: Config.siteTitle, message: "Error getting posts." });

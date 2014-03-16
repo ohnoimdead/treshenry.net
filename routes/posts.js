@@ -21,8 +21,9 @@ var routes = [
     authorized: true,
     callback:   function(req, res) {
       var post = new Post({
-        title: req.body.post_title,
-        body:  req.body.post_body
+        title:   req.body.post_title,
+        body:    req.body.post_body,
+        private: true ? req.body.private === 'private' : false
       });
 
       post.save(function(err) {

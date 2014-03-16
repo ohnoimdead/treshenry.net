@@ -1,5 +1,12 @@
 <form action="/post" method="post">
-  <label for="title">Title</label><input type="text" id="post_title" name="post_title" value="{{ post_title }}">
-  <label for="body">Body</label><textarea id="post_body" name="post_body">{{ post_body }}</textarea>
+  <label for="title">Title</label>
+  <input type="text" id="post_title" name="post_title" value="{{ post_title }}">
+
+  <label for="body">Body</label>
+  <textarea id="post_body" name="post_body">{{ post_body }}</textarea>
+
+  <label for="private">Private</label>
+  <input type="checkbox" name="private" value="private" {{#if post_private }}checked="checked"{{/if}} id="private">
+
   <input type="submit" value="Post">
 </form>
