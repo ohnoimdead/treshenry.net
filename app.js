@@ -1,8 +1,9 @@
-var Express = require('express'),
-    Http = require('http'),
-    Path = require('path'),
+var Express  = require('express'),
+    Http     = require('http'),
+    Path     = require('path'),
     Mongoose = require('mongoose'),
-    Hbs = require('express-hbs');
+    Hbs      = require('express-hbs'),
+    Marked   = require('marked');
 
 var Config              = require('./config'),
     User                = require('./models/user'),
@@ -34,6 +35,13 @@ app.use(Express.session());
 app.use(app.router);
 app.use(require('less-middleware')({ src: Path.join(__dirname, 'public') }));
 app.use(Express.static(Path.join(__dirname, 'public')));
+
+// HBS helper for markdown
+Hbs.registerHelper('markdown', function(text, options) {
+  if(typeof(text) === 'string') {
+    return new Hbs.SafeString(Marked(text));
+  }
+});
 
 // development only
 if('development' == app.get('env')) {

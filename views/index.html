@@ -2,9 +2,10 @@
   <a href="/post">New</a>
   <a href="/logout">Logout</a>
 {{/if}}
+
 {{#posts}}
   <h1>{{ title }}</h1>
-  <div class="post-body">{{ body }}</div>
+  <div class="post-body">{{{markdown body}}}</div>
   {{#if ../logged_in}}
     {{#if private}}<div class="private-post">Post is private</div>{{/if}}
     <div class="post-controls">
