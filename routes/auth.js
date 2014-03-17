@@ -33,7 +33,7 @@ var routes = [
     path:     '/logout',
     callback: function(req, res) {
       req.session.user = null;
-      res.render('auth/login', { title: titles.login, message: "You have been logged out." });
+      res.redirect('/');
     }
   },
   {

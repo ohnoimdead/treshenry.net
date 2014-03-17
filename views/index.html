@@ -6,14 +6,15 @@
   <h1>{{ title }}</h1>
   <div class="post-body">{{ body }}</div>
   {{#if ../logged_in}}
-  <div class="post-controls">
-    <a href="/post/edit/{{ _id }}">Edit</a>
-    <form method="post" action="/post/delete">
-      <input name="_method" type="hidden" value="delete">
-      <input type="hidden" id="id" name="id" value="{{ _id }}">
-      <input type="submit" class="delete-post-button" value="Delete">
-    </form>
-  </div>
+    {{#if private}}<div class="private-post">Post is private</div>{{/if}}
+    <div class="post-controls">
+      <a href="/post/edit/{{ _id }}">Edit</a>
+      <form method="post" action="/post/delete">
+        <input name="_method" type="hidden" value="delete">
+        <input type="hidden" id="id" name="id" value="{{ _id }}">
+        <input type="submit" class="delete-post-button" value="Delete">
+      </form>
+    </div>
   {{/if}}
 {{/posts}}
 
