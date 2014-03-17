@@ -7,7 +7,8 @@ TODO
 [doen] Private posts
 [done] Edit post
 [done] Delete post
-Wire up codemirror for post body
-Pagination
+[done] Wire up codemirror for post body
+Support markdown for post body
 Post detail (with slug)
+Pagination
 Styles

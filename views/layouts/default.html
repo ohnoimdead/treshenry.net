@@ -2,12 +2,19 @@
 <html>
   <head>
     <title>{{ title }}</title>
+
     <link rel='stylesheet' href='/stylesheets/normalize.css'>
     <link rel='stylesheet' href='/stylesheets/style.css'>
-    <script src="/javascripts/zepto.js"></script>
+    {{{block "stylesheets"}}}
+
+    <script src='/javascripts/zepto.js'></script>
+    {{{block "scripts"}}}
+
   </head>
   <body>
+
     {{ message }}
-    {{{ body }}}
+    {{{body}}}
+
   </body>
 </html>

@@ -1,3 +1,16 @@
+{{#contentFor "stylesheets"}}
+  <link rel='stylesheet' href='/stylesheets/codemirror.css'>
+  <link rel='stylesheet' href='/stylesheets/vibrant-ink.css'>
+{{/contentFor}}
+
+{{#contentFor "scripts"}}
+  <script src='/javascripts/codemirror.js'></script>
+  <script src='/javascripts/vim.js'></script>
+  <script src='/javascripts/search.js'></script>
+  <script src='/javascripts/searchcursor.js'></script>
+  <script src='/javascripts/match-highlighter.js'></script>
+{{/contentFor}}
+
 <form action="/post" method="post">
   <label for="title">Title</label>
   <input type="text" id="post_title" name="post_title" value="{{ post.title }}">
@@ -12,3 +25,14 @@
   <input type="submit" value="Save">
   <a href="/">Cancel</a>
 </form>
+
+<script type="text/javascript" charset="utf-8">
+  CodeMirror.fromTextArea($('#post_body')[0], {
+    mode: 'markdown',
+    lineNumber: false,
+    theme: 'vibrant-ink',
+    extraKeys: {'Enter': 'newlineAndIndentContinueMarkdownList'},
+    vimMode: true,
+    showCursorWhenSelecting: true
+  });
+</script>
