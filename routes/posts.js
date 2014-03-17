@@ -3,7 +3,8 @@ var Router              = require('../utils/router'),
     ValidationFormatter = require('../utils/validation_formatter');
 
 var titles = {
-  new: "New Post"
+  new:  "New Post",
+  edit: "Edit Post"
 };
 
 var routes = [
@@ -65,6 +66,26 @@ var routes = [
           res.render('posts/post_form', { title: titles.edit, message: 'There was an error editing the post.' });
         } else {
           res.render('posts/post_form', { title: titles.edit, post: post });
+        }
+      });
+    }
+  },
+  {
+    method: 'delete',
+    path:   '/post/delete',
+    authorized: true,
+    callback: function(req, res) {
+      Post.findOne({ _id: req.body.id }, function(err, post) {
+        if(err) {
+          console.log('Error deleting post: ', err);
+          res.redirect('/');
+        } else {
+          post.remove(function(err) {
+            if(err) {
+              console.log('Error deleting post: ', err);
+            }
+            res.redirect('/');
+          });
         }
       });
     }

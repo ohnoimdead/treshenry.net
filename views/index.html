@@ -8,6 +8,17 @@
   {{#if ../logged_in}}
   <div class="post-controls">
     <a href="/post/edit/{{ _id }}">Edit</a>
+    <form method="post" action="/post/delete">
+      <input name="_method" type="hidden" value="delete">
+      <input type="hidden" id="id" name="id" value="{{ _id }}">
+      <input type="submit" class="delete-post-button" value="Delete">
+    </form>
   </div>
   {{/if}}
 {{/posts}}
+
+{{#if logged_in}}
+<script type="text/javascript" charset="utf-8">
+  $('.delete-post-button').on("click", function() { return confirm('Are you sure?'); });
+</script>
+{{/if}}

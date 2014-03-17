@@ -6,7 +6,7 @@ TODO
 [done] List posts on index
 [doen] Private posts
 [done] Edit post
-Delete post
+[done] Delete post
 Wire up codemirror for post body
 Pagination
 Post detail (with slug)
