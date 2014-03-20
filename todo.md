@@ -8,7 +8,7 @@ TODO
 [done] Edit post
 [done] Delete post
 [done] Wire up codemirror for post body
-Support markdown for post body
-Post detail (with slug)
+[done] Support markdown for post body
+[done] Post detail (with slug)
 Pagination
 Styles

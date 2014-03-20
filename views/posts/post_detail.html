@@ -1,9 +1,4 @@
-{{#if logged_in}}
-  <a href="/post">New</a>
-  <a href="/logout">Logout</a>
-{{/if}}
-
-{{#posts}}
+{{#post}}
   {{> post}}
   {{#if ../logged_in}}
     {{#if private}}<div class="private-post">Post is private</div>{{/if}}
@@ -16,10 +11,4 @@
       </form>
     </div>
   {{/if}}
-{{/posts}}
-
-{{#if logged_in}}
-<script type="text/javascript" charset="utf-8">
-  $('.delete-post-button').on("click", function() { return confirm('Are you sure?'); });
-</script>
-{{/if}}
+{{/post}}
