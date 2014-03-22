@@ -4,5 +4,6 @@ module.exports = {
   defaultPassword: 'tres',
   salt: 'somesecret',
   secret: 'changemetosomethingsecure',
-  siteTitle: 'treshenry.net'
+  siteTitle: 'treshenry.net',
+  pageSize: 3
 };

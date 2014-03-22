@@ -18,6 +18,10 @@
   {{/if}}
 {{/posts}}
 
+{{#if date_marker}}
+<div class="paging-controls"><a href="/?marker={{ date_marker }}">Previous Posts</a></div>
+{{/if}}
+
 {{#if logged_in}}
 <script type="text/javascript" charset="utf-8">
   $('.delete-post-button').on("click", function() { return confirm('Are you sure?'); });

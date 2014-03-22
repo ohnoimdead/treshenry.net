@@ -7,7 +7,13 @@ var routes = [
     method: 'get',
     path: '/',
     callback: function(req, res) {
-      Post.pagedPosts(req.session.user != null, 1, 100, function(err, posts) {
+      var marker = new Date(); // Default to showing most recent
+
+      // But if we have a marker passed in (i.e. we are paging back) then
+      // use that for the date instead.
+      if(req.query.marker) marker = new Date(parseInt(req.query.marker, 10));
+
+      Post.pagedPosts(req.session.user != null, marker, Config.pageSize, function(err, posts) {
         if(err) {
           console.log('Error getting posts: ', err);
           res.render('index', {
@@ -15,11 +21,18 @@ var routes = [
             message: 'Error getting posts.'
           });
         } else {
-          res.render('index', {
+
+          var context = {
             title: Config.siteTitle,
             logged_in: req.session.user != null,
             posts: posts
-          });
+          };
+
+          if(posts.length > 0) {
+            context.date_marker = posts[posts.length - 1].created.getTime();
+          }
+
+          res.render('index', context);
         }
       });
     }

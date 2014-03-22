@@ -10,5 +10,7 @@ TODO
 [done] Wire up codemirror for post body
 [done] Support markdown for post body
 [done] Post detail (with slug)
-Pagination
+[done] Basic pagination
+Calendar view
 Styles
+Tagging

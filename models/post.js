@@ -5,23 +5,21 @@ var Schema = Mongoose.Schema;
 
 var postSchema = new Schema({
   title:   { type: String, required: true },
-  slug:    { type: String, unique: true },
+  slug:    { type: String, index: true, unique: true },
   body:    { type: String, required: true },
   private: { type: Boolean, default: false },
-  created: { type: Date, default: Date.now }
+  created: { type: Date, default: Date.now, index: true }
 });
 
-postSchema.statics.pagedPosts = function(showPrivate, pageNumber, pageSize, callback) {
-  var query;
-  if(showPrivate) {
-    query = this.find({});
-  } else {
-    query = this.find({ private: false });
-  }
-  query.sort('-created')
-       .skip((pageNumber - 1) * pageSize)
-       .limit(pageSize)
-       .exec(callback);
+postSchema.statics.pagedPosts = function(showPrivate, date, pageSize, callback) {
+  var query = { created: { $lt: date }};
+
+  if(!showPrivate) query.private = false;
+
+  this.find(query)
+      .sort('-created')
+      .limit(pageSize)
+      .exec(callback);
 };
 
 postSchema.pre('save', function(next) {
@@ -31,5 +29,7 @@ postSchema.pre('save', function(next) {
   }
   next();
 });
+
+postSchema.set('autoIndex', false);
 
 module.exports = Mongoose.model('Post', postSchema);
