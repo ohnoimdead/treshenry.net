@@ -1,6 +1,7 @@
-var Router = require('../utils/router'),
-    Config = require('../config'),
-    Post   = require('../models/post');
+var Router       = require('../utils/router'),
+    ErrorHandler = require('../utils/error_handler'),
+    Config       = require('../config'),
+    Post         = require('../models/post');
 
 var routes = [
   {
@@ -14,14 +15,7 @@ var routes = [
       if(req.query.marker) marker = new Date(parseInt(req.query.marker, 10));
 
       Post.pagedPosts(req.session.user != null, marker, Config.pageSize, function(err, posts) {
-        if(err) {
-          console.log('Error getting posts: ', err);
-          res.render('index', {
-            title: Config.siteTitle,
-            message: 'Error getting posts.'
-          });
-        } else {
-
+        ErrorHandler(err, res, function() {
           var context = {
             title: Config.siteTitle,
             logged_in: req.session.user != null,
@@ -33,7 +27,7 @@ var routes = [
           }
 
           res.render('index', context);
-        }
+        });
       });
     }
   }

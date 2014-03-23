@@ -1,5 +1,5 @@
-var Router       = require('../utils/router'),
-    User         = require('../models/user');
+var Router = require('../utils/router'),
+    User   = require('../models/user');
 
 var titles = {
   login:    "Login",

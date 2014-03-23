@@ -5,5 +5,5 @@ module.exports = {
   salt: 'somesecret',
   secret: 'changemetosomethingsecure',
   siteTitle: 'treshenry.net',
-  pageSize: 3
+  pageSize: 2
 };

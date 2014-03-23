@@ -11,6 +11,7 @@ TODO
 [done] Support markdown for post body
 [done] Post detail (with slug)
 [done] Basic pagination
-Calendar view
+[done] Calendar view
+Display dates on index and detail
 Styles
 Tagging

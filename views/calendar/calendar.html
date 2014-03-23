@@ -1,0 +1,33 @@
+<div class="cal-label">{{ label }}</div>
+
+<div class="cal-week cal-header">
+  <div class="cal-title">Sun</div>
+  <div class="cal-title">Mon</div>
+  <div class="cal-title">Tue</div>
+  <div class="cal-title">Wed</div>
+  <div class="cal-title">Thu</div>
+  <div class="cal-title">Fri</div>
+  <div class="cal-title">Sat</div>
+</div>
+
+{{#each weeks}}
+  <div class="cal-week">
+    {{#each this}}
+      <div class="cal-day">
+        <div class="cal-date">{{#if date}}{{ date }}{{else}}&nbsp;{{/if}}</div>
+        {{#each items}}
+          <div class="cal-item"><a href="/post/{{ slug }}">{{ title }}</a></div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+{{/each}}
+
+<div class="cal-paging">
+  {{#if hasPrevious}}
+    <a href="/calendar?year={{ year }}&month={{ previousMonth }}">Previous Month</a>
+  {{/if}}
+  {{#if hasNext}}
+    <a href="/calendar?year={{ year }}&month={{ nextMonth }}">Next Month</a>
+  {{/if}}
+</div>

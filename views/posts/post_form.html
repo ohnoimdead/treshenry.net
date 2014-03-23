@@ -20,11 +20,24 @@
   <textarea id="post_body" name="post_body">{{ post.body }}</textarea>
 
   <label for="private">Private</label>
-  <input type="checkbox" name="private" value="private" {{#if post.private }}checked="checked"{{/if}} id="private">
+  <input type="checkbox" name="private" value="private" {{#if post.private}}checked="checked"{{/if}} id="private">
 
   <input type="hidden" name="id" id="id" value="{{ post._id }}">
-  <input type="submit" value="Save">
-  <a href="/">Cancel</a>
+
+  {{#if post._id}}
+  <div>
+    <input type="text" name="month" value="{{ month }}" id="month">/
+    <input type="text" name="day" value="{{ day }}" id="day">/
+    <input type="text" name="year" value="{{ year }}" id="year">
+    <input type="text" name="hour" value="{{ hour }}" id="hour">:
+    <input type="text" name="minute" value="{{ min }}" id="minute">
+  </div>
+  {{/if}}
+
+  <div>
+    <input type="submit" value="Save">
+    <a href="/">Cancel</a>
+  </div>
 </form>
 
 <script type="text/javascript" charset="utf-8">

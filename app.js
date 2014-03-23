@@ -5,12 +5,13 @@ var Express  = require('express'),
     Hbs      = require('express-hbs'),
     Marked   = require('marked');
 
-var Config              = require('./config'),
-    User                = require('./models/user'),
-    RegisterIndexRoutes = require('./routes/index'),
-    RegisterAuthRoutes  = require('./routes/auth'),
-    RegisterUserRoutes  = require('./routes/users'),
-    RegisterPostRoutes  = require('./routes/posts');
+var Config                 = require('./config'),
+    User                   = require('./models/user'),
+    RegisterIndexRoutes    = require('./routes/index'),
+    RegisterAuthRoutes     = require('./routes/auth'),
+    RegisterUserRoutes     = require('./routes/users'),
+    RegisterPostRoutes     = require('./routes/posts'),
+    RegisterCalendarRoutes = require('./routes/calendar');
 
 var app = Express();
 
@@ -67,6 +68,7 @@ RegisterIndexRoutes(app);
 RegisterAuthRoutes(app);
 RegisterUserRoutes(app);
 RegisterPostRoutes(app);
+RegisterCalendarRoutes(app);
 
 Http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
