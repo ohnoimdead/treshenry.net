@@ -2,8 +2,7 @@ var Express  = require('express'),
     Http     = require('http'),
     Path     = require('path'),
     Mongoose = require('mongoose'),
-    Hbs      = require('express-hbs'),
-    Marked   = require('marked');
+    Hbs      = require('express-hbs');
 
 var Config                 = require('./config'),
     User                   = require('./models/user'),
@@ -11,7 +10,9 @@ var Config                 = require('./config'),
     RegisterAuthRoutes     = require('./routes/auth'),
     RegisterUserRoutes     = require('./routes/users'),
     RegisterPostRoutes     = require('./routes/posts'),
-    RegisterCalendarRoutes = require('./routes/calendar');
+    RegisterCalendarRoutes = require('./routes/calendar'),
+    MarkdownHelper         = require('./views/helpers/markdown'),
+    MomentHelpers          = require('./views/helpers/moment');
 
 var app = Express();
 
@@ -37,12 +38,9 @@ app.use(app.router);
 app.use(require('less-middleware')({ src: Path.join(__dirname, 'public') }));
 app.use(Express.static(Path.join(__dirname, 'public')));
 
-// HBS helper for markdown
-Hbs.registerHelper('markdown', function(text, options) {
-  if(typeof(text) === 'string') {
-    return new Hbs.SafeString(Marked(text));
-  }
-});
+// Register helpers
+MarkdownHelper(Hbs);
+MomentHelpers(Hbs);
 
 // development only
 if('development' == app.get('env')) {
@@ -64,6 +62,7 @@ User.findOne({username: Config.defaultUsername}, function(err, defaultUser) {
   }
 });
 
+// Register routes
 RegisterIndexRoutes(app);
 RegisterAuthRoutes(app);
 RegisterUserRoutes(app);

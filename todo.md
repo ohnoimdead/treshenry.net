@@ -12,6 +12,6 @@ TODO
 [done] Post detail (with slug)
 [done] Basic pagination
 [done] Calendar view
-Display dates on index and detail
+[done] Display dates on index and detail
 Styles
 Tagging
