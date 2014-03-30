@@ -2,6 +2,7 @@
   "name": "treshenry.net",
   "version": "0.0.1",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "start": "node node_modules/supervisor/lib/cli-wrapper.js app.js",
     "debug": "node --debug-brk app.js & node-inspector"
