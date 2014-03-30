@@ -22,7 +22,7 @@ var routes = [
             posts: posts
           };
 
-          if(posts.length > 0) {
+          if(posts.length === Config.pageSize) {
             context.date_marker = posts[posts.length - 1].created.getTime();
           }
 
