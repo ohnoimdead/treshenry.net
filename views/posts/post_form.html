@@ -13,26 +13,29 @@
 {{/contentFor}}
 
 <form action="/post" method="post">
-  <label for="title">Title</label>
-  <input type="text" id="post_title" name="post_title" value="{{ post.title }}">
+  <label for="title">Title:</label>
+  <input type="text" id="post_title" name="post_title" value="{{ post.title }}"><br>
 
-  <label for="body">Body</label>
-  <textarea id="post_body" name="post_body">{{ post.body }}</textarea>
-
-  <label for="private">Private</label>
-  <input type="checkbox" name="private" value="private" {{#if post.private}}checked="checked"{{/if}} id="private">
+  <div class="textarea-codemirror">
+    <textarea id="post_body" name="post_body">{{ post.body }}</textarea>
+  </div>
 
   <input type="hidden" name="id" id="id" value="{{ post._id }}">
+  <input type="hidden" name="slug" id="slug" value="{{ post.slug }}">
 
-  {{#if post._id}}
-  <div>
-    <input type="text" name="month" value="{{ month }}" id="month">/
-    <input type="text" name="day" value="{{ day }}" id="day">/
-    <input type="text" name="year" value="{{ year }}" id="year">
-    <input type="text" name="hour" value="{{ hour }}" id="hour">:
-    <input type="text" name="minute" value="{{ min }}" id="minute">
+  <div class="date-form">
+    <label for="private">Private:</label>
+    <input type="checkbox" name="private" value="private" {{#if post.private}}checked="checked"{{/if}} id="private">
+
+    {{#if post._id}}
+      <label for="month">Created:</label>
+      <input type="text" name="month" value="{{ month }}" id="month">/
+      <input type="text" name="day" value="{{ day }}" id="day">/
+      <input type="text" name="year" value="{{ year }}" id="year">
+      <input type="text" name="hour" value="{{ hour }}" id="hour">:
+      <input type="text" name="minute" value="{{ min }}" id="minute">
+    {{/if}}
   </div>
-  {{/if}}
 
   <div>
     <input type="submit" value="Save">

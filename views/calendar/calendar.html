@@ -16,18 +16,35 @@
       <div class="cal-day">
         <div class="cal-date">{{#if date}}{{ date }}{{else}}&nbsp;{{/if}}</div>
         {{#each items}}
-          <div class="cal-item"><a href="/post/{{ slug }}">{{ title }}</a></div>
+        <div class="cal-item"><a title="{{ title }}" href="/post/{{ slug }}">{{ title }}</a></div>
         {{/each}}
       </div>
     {{/each}}
   </div>
 {{/each}}
 
+<div style="clear: both;"></div>
+
+<div class="cal-list">
+  {{#each weeks}}
+    {{#each this}}
+      {{#if items}}
+        <div class="cal-list-date">{{ date }}</div>
+        <div class="cal-list-items">
+          {{#each items}}
+            <div class="cal-item"><a href="/post/{{ slug }}">{{ title }}</a></div>
+          {{/each}}
+        </div>
+      {{/if}}
+    {{/each}}
+  {{/each}}
+</div>
+
 <div class="cal-paging">
   {{#if hasPrevious}}
-    <a href="/calendar?year={{ year }}&month={{ previousMonth }}">Previous Month</a>
+    <div class="cal-prev"><a href="/calendar?year={{ year }}&month={{ previousMonth }}">&laquo; Previous</a></div>
   {{/if}}
   {{#if hasNext}}
-    <a href="/calendar?year={{ year }}&month={{ nextMonth }}">Next Month</a>
+    <div class="cal-next"><a href="/calendar?year={{ year }}&month={{ nextMonth }}">Next Month &raquo;</a></div>
   {{/if}}
 </div>

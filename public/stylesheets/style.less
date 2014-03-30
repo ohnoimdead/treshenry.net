@@ -1,14 +1,217 @@
+@accent: #FF7C00;
+
+
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Lora', serif;
+}
+
+a {
+  text-decoration: none;
+  color: @accent;
+}
+
+a:hover {
+  color: #000;
+}
+
+form {
+  margin-top: 20px;
+}
+
+label {
+  color: #666;
+  padding-right: 5px;
+}
+
+input[type=text], input[type=password] {
+  &:focus {
+    outline: none;
+  }
+
+  border: 0;
+  border-bottom: 1px solid @accent;
+  width: 120px;
+  margin-right: 10px;
+}
+
+input[type=checkbox] {
+  margin-right: 10px;
+}
+
+input[type=submit] {
+  margin: 20px 10px 0 0;
+}
+
+#post_title {
+  width: 500px;
+}
+
+.textarea-codemirror {
+  margin: 20px 0;
+}
+
+.date-form {
+  input[type=text] {
+    width: 18px;
+  }
+
+  #year {
+    width: 36px;
+  }
+}
+
+.flash {
+  color: #F00;
+}
+
+.main-content {
+  max-width: 600px;
+  padding: 40px 20px 0 20px;
+  margin: 0 auto;
+  border-top: 3px solid @accent;
+  border-bottom: 5px solid @accent;
+}
+
+.main-head, .main-foot {
+  text-align: center;
+}
+
+.main-foot {
+  padding-top: 40px;
+
+
+  .copyright {
+    color: #666;
+    font-size: .8em;
+    margin: 10px 0 3px;
+  }
+}
+
+.post {
+  h1 {
+    font-family: 'Antic Slab', serif;
+    font-size: 2.2em;
+    letter-spacing: .13em;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .post-created {
+    text-align: center;
+    font-size: .9em;
+    letter-spacing: .13em;
+    color: #999;
+    margin-bottom: 20px;
+  }
+
+  .post-body {
+    font-size: 1.2em;
+    letter-spacing: .05em;
+    line-height: 1.6em;
+    color: #666;
+    margin-bottom: 40px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .post {
+    h1 {
+      font-size: 1.8em;
+      line-height: 1.1em;
+    }
+
+    .post-created {
+      font-size: .8em;
+    }
+
+    .post-body {
+      font-size: 1.1em;
+      line-height: 1.4em;
+    }
+
+    .date-ago {
+      display: none;
+    }
+  }
+}
+
+.post-controls {
+  margin-top: -50px;
+  form {
+    a {
+      padding-right: 10px;
+    }
+  }
 }
 
 /* Calendar styles */
+@media (max-width: 650px) {
+  .cal-week {
+    display: none;
+  }
+}
+
+@media (min-width: 651px) {
+  .cal-list {
+    display: none;
+  }
+}
+
 .cal-week {
   clear: both;
+
+  .cal-day, .cal-title {
+    float: left;
+    width: 13.2%;
+    margin: 1px;
+    padding: 2px 0 2px 2px;
+  }
+  .cal-day {
+    color: #666;
+    height: 60px;
+    background-color: #EEE;
+    .cal-item {
+      font-size: .8em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
-.cal-day, .cal-title {
-  float: left;
-  width: 14%;
+.cal-label {
+  font-family: 'Antic Slab', serif;
+  font-size: 2.2em;
+  letter-spacing: .13em;
+  text-align: center;
+  margin: 20px 0;
+  color: #666;
 }
 
+.cal-list-date {
+  background-color: #EEE;
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+.cal-list-items {
+  margin-bottom: 15px;
+}
+
+.cal-paging {
+  margin-top: 20px;
+
+  .cal-prev {
+    float: left;
+  }
+
+  .cal-next {
+    float: right;
+  }
+}

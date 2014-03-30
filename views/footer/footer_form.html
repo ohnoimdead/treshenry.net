@@ -1,0 +1,31 @@
+{{#contentFor "stylesheets"}}
+  <link rel="stylesheet" href="/stylesheets/codemirror.css">
+  <link rel="stylesheet" href="/stylesheets/vibrant-ink.css">
+{{/contentFor}}
+
+{{#contentFor "scripts"}}
+  <script src="/javascripts/codemirror.js"></script>
+  <script src="/javascripts/vim.js"></script>
+  <script src="/javascripts/markdown.js"></script>
+  <script src="/javascripts/search.js"></script>
+  <script src="/javascripts/searchcursor.js"></script>
+  <script src="/javascripts/match-highlighter.js"></script>
+{{/contentFor}}
+
+<form action="/footer" method="post">
+  <textarea id="content" name="content">{{ content }}</textarea>
+
+  <input type="submit" value="Update">
+  <a href="/">Cancel</a>
+</form>
+
+<script type="text/javascript" charset="utf-8">
+  CodeMirror.fromTextArea($('#content')[0], {
+    mode: 'markdown',
+    lineNumber: false,
+    theme: 'vibrant-ink',
+    extraKeys: {'Enter': 'newlineAndIndentContinueMarkdownList'},
+    vimMode: true,
+    showCursorWhenSelecting: true
+  });
+</script>

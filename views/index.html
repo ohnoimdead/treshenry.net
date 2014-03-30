@@ -1,16 +1,10 @@
-{{#if logged_in}}
-  <a href="/post">New Post</a>
-  <a href="/password">Change Password</a>
-  <a href="/logout">Logout</a>
-{{/if}}
-
 {{#posts}}
   {{> post}}
   {{#if ../logged_in}}
     {{#if private}}<div class="private-post">Post is private</div>{{/if}}
     <div class="post-controls">
-      <a href="/post/edit/{{ _id }}">Edit</a>
       <form method="post" action="/post/delete">
+        <a href="/post/edit/{{ _id }}">Edit</a>
         <input name="_method" type="hidden" value="delete">
         <input type="hidden" id="id" name="id" value="{{ _id }}">
         <input type="submit" class="delete-post-button" value="Delete">
@@ -20,7 +14,7 @@
 {{/posts}}
 
 {{#if date_marker}}
-<div class="paging-controls"><a href="/?marker={{ date_marker }}">Previous Posts</a></div>
+  <div class="paging-controls"><a href="/?marker={{ date_marker }}">&laquo; Go Back</a></div>
 {{/if}}
 
 {{#if logged_in}}

@@ -14,4 +14,5 @@ TODO
 [done] Calendar view
 [done] Display dates on index and detail
 Styles
+Post/edit from mobile
 Tagging

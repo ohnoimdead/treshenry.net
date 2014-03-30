@@ -85,7 +85,7 @@ var routes = [
               message: 'There was an error updating the post.'
             });
           } else {
-            res.redirect('/');
+            res.redirect('/post/' + req.body.slug);
           }
         });
       } else {

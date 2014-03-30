@@ -1,3 +1,5 @@
-<h1><a href="/post/{{ slug }}">{{ title }}</a></h1>
-<div>{{moment-long created}} ({{moment-ago created}})</div>
-<div class="post-body">{{{markdown body}}}</div>
+<div class="post">
+  <h1><a href="/post/{{ slug }}">{{ title }}</a></h1>
+  <div class="post-created">{{moment-long created}}<span class="date-ago"> &ndash; {{moment-ago created}}</span></div>
+  <div class="post-body">{{{markdown body}}}</div>
+</div>

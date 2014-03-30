@@ -6,12 +6,15 @@ var Express  = require('express'),
 
 var Config                 = require('./config'),
     User                   = require('./models/user'),
+    Footer                 = require('./models/footer'),
     RegisterIndexRoutes    = require('./routes/index'),
     RegisterAuthRoutes     = require('./routes/auth'),
     RegisterUserRoutes     = require('./routes/users'),
+    RegisterFooterRoutes   = require('./routes/footer'),
     RegisterPostRoutes     = require('./routes/posts'),
     RegisterCalendarRoutes = require('./routes/calendar'),
     MarkdownHelper         = require('./views/helpers/markdown'),
+    FooterHelper           = require('./views/helpers/footer'),
     MomentHelpers          = require('./views/helpers/moment');
 
 var app = Express();
@@ -40,6 +43,7 @@ app.use(Express.static(Path.join(__dirname, 'public')));
 
 // Register helpers
 MarkdownHelper(Hbs);
+FooterHelper(Hbs);
 MomentHelpers(Hbs);
 
 // development only
@@ -62,10 +66,23 @@ User.findOne({username: Config.defaultUsername}, function(err, defaultUser) {
   }
 });
 
+// Also on startup create the default footer if it doesn't exist
+Footer.findOne({}, function(err, footer) {
+  if(err) return console.error(err);
+
+  if(!footer) {
+    var footer = new Footer({
+      content: '<div class="copyright">Copyright &copy; Tres Henry. All rights reserved.</div>'
+    });
+    footer.save();
+  }
+});
+
 // Register routes
 RegisterIndexRoutes(app);
 RegisterAuthRoutes(app);
 RegisterUserRoutes(app);
+RegisterFooterRoutes(app);
 RegisterPostRoutes(app);
 RegisterCalendarRoutes(app);
 

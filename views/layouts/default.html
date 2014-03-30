@@ -1,10 +1,13 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width">
+
     <title>{{ title }}</title>
 
     <link rel="stylesheet" href="/stylesheets/normalize.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Lora|Antic+Slab' rel='stylesheet' type='text/css'>
     {{{block "stylesheets"}}}
 
     <script src="/javascripts/zepto.js"></script>
@@ -12,9 +15,29 @@
 
   </head>
   <body>
+    <div class="main-content">
+      <!-- header -->
+      <div class="main-head">
+        <div><a href="/"><img src="/images/tres-round-bw.png"></a></div>
+        {{#if logged_in}}
+          <a href="/post">New Post</a> &ndash;
+          <a href="/password">Change Password</a> &ndash;
+          <a href="/footer">Edit Footer</a> &ndash;
+          <a href="/logout">Logout</a>
+        {{/if}}
+      </div>
 
-    {{ message }}
-    {{{body}}}
+      <!-- flash -->
+      <div class="flash">{{ message }}</div>
 
+      <!-- content -->
+      {{{body}}}
+
+      <!-- footer -->
+      <div class="main-foot">
+        <a href="/calendar">Calendar</a>
+        {{footer}}
+      </div>
+    </div>
   </body>
 </html>
