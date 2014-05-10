@@ -1,8 +1,9 @@
-var Express  = require('express'),
-    Http     = require('http'),
-    Path     = require('path'),
-    Mongoose = require('mongoose'),
-    Hbs      = require('express-hbs');
+var Express    = require('express'),
+    Http       = require('http'),
+    Path       = require('path'),
+    Mongoose   = require('mongoose'),
+    Hbs        = require('express-hbs'),
+    MongoStore = require('connect-mongo')(Express);
 
 var Config                 = require('./config'),
     User                   = require('./models/user'),
@@ -36,7 +37,15 @@ app.use(Express.json());
 app.use(Express.urlencoded());
 app.use(Express.methodOverride());
 app.use(Express.cookieParser(Config.secret));
-app.use(Express.session());
+
+// Use mongodb for sessions
+app.use(Express.session({
+  secret: Config.secret,
+  store: new MongoStore({
+    url: Config.mongoUri
+  })
+}));
+
 app.use(app.router);
 app.use(require('less-middleware')({ src: Path.join(__dirname, 'public') }));
 app.use(Express.static(Path.join(__dirname, 'public')));
