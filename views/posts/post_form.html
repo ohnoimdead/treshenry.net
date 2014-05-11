@@ -10,6 +10,7 @@
   <script src="/javascripts/search.js"></script>
   <script src="/javascripts/searchcursor.js"></script>
   <script src="/javascripts/match-highlighter.js"></script>
+  <script src="/javascripts/hardwrap.js"></script>
 {{/contentFor}}
 
 <form action="/post" method="post">
@@ -44,12 +45,21 @@
 </form>
 
 <script type="text/javascript" charset="utf-8">
-  CodeMirror.fromTextArea($('#post_body')[0], {
+  var editor = CodeMirror.fromTextArea($('#post_body')[0], {
     mode: 'markdown',
     lineNumber: false,
     theme: 'vibrant-ink',
     extraKeys: {'Enter': 'newlineAndIndentContinueMarkdownList'},
     vimMode: true,
     showCursorWhenSelecting: true
+  });
+
+  // Automatically hard wrap on change
+  var wait, options = {column: 74};
+  editor.on("change", function(cm, change) {
+    clearTimeout(wait);
+    wait = setTimeout(function() {
+      cm.wrapParagraphsInRange(change.from, CodeMirror.changeEnd(change), options);
+    }, 200);
   });
 </script>
